@@ -31,7 +31,17 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     updateThought(req, res) { },
+
+    //use $pull like in the users
     deleteThought(req, res) { },
-    addReaction(req, res) { },
+
+    //match add 
+    addReaction(req, res) { 
+        Thought.findOneAndUpdate({_id: req.params.thoughtId}, {$addToSet: {reactions: req.body}}, {runValidators: true, new:true})
+    },
+//try to send messages when i can 
+.then
+.catch
+
     deleteReaction(req, res) { },
 };
