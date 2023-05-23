@@ -1,72 +1,38 @@
 # 18-social-media
 
-<!-- user = student
-course = thought
+## Table of Contents
 
-when i delete a user i want to delete all their thoughts
-delete user
-update user
-delete thought
-update thought
+- [Description](#Description)
+- [Installation](#Installation)
+- [Usage](#Usage)
+- [Credits](#Credits)
+- [License](#License)
+- [Badges](#Badges)
 
-add reaction 
-add friend
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
+### Description
 
-//looks like my plan here 
+User Story
+AS A social media startup
+I WANT an API for my social network that uses a NoSQL database
+SO THAT my website can handle large amounts of unstructured data
 
-// Delete a student and remove them from the course
-  deleteStudent(req, res) {
-    Student.findOneAndRemove({ _id: req.params.studentId })
-      .then((student) =>
-        !student
-          ? res.status(404).json({ message: 'No such student exists' })
-          : Course.findOneAndUpdate(
-              { students: req.params.studentId },
-              { $pull: { students: req.params.studentId } },
-              { new: true }
-            )
-      )
-      .then((course) =>
-        !course
-          ? res.status(404).json({
-              message: 'Student deleted, but no courses found',
-            })
-          : res.json({ message: 'Student successfully deleted' })
-      )
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  },
+Acceptance Criteria
+GIVEN a social network API
+WHEN I enter the command to invoke the application
+THEN my server is started and the Mongoose models are synced to the MongoDB database
+WHEN I open API GET routes in Insomnia for users and thoughts
+THEN the data for each of these routes is displayed in a formatted JSON
+WHEN I test API POST, PUT, and DELETE routes in Insomnia
+THEN I am able to successfully create, update, and delete users and thoughts in my database
+WHEN I test API POST and DELETE routes in Insomnia
+THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
 
-    // Delete a course
-  deleteCourse(req, res) {
-    Course.findOneAndDelete({ _id: req.params.courseId })
-      .then((course) =>
-        !course
-          ? res.status(404).json({ message: 'No course with that ID' })
-          : Student.deleteMany({ _id: { $in: course.students } })
-      )
-      .then(() => res.json({ message: 'Course and students deleted!' }))
-      .catch((err) => res.status(500).json(err));
-  }, -->
+### Credits
 
-## Order of operation
+UC Berkeley Coding Bootcamp, (https://bootcamp.berkeley.edu/coding/)
 
-1. Users
-   1. POST new user, save [user ID] (do this twice to have two IDs)
-   2. POST add a friend by [user ID] and [friend user ID]
-   3. GET all users
-   4. GET user by [user ID]
-   5. UPDATE user by [user ID]
-   6. DELETE remove friend by [user ID] and [friend user ID]
-   7. DELETE user by [friend user ID], keep [user ID]
-2. Thoughts
-   1. POST new thought using [user ID], save [thought ID]
-   2. POST new reaction, using [thought ID] and [user ID], save [reaction ID]
-   3. GET all thoughts
-   4. GET thought by [thought ID]
-   5. UPDATE thought by [thought ID] (pass new thoughtText)
-   6. DELETE reaction by [thought ID] and [reaction ID]
-   7. DELETE thought by [thought ID]
+### License
+
+GPL 
