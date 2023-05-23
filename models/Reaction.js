@@ -1,9 +1,14 @@
 const {Schema, Types} = require("mongoose");
 
+// Reactions are comments
 const reactionSchema = new Schema({
-    reactionId: {type:Schema.Types.ObjectId, default: () => new Types.ObjectId()},
+    reactionId: {
+        type: Schema.Types.ObjectId, 
+        default: () => new Types.ObjectId()
+    },
     body: {type:String, minlength: 1, maxlength: 280},
-    username: { type: String, required: true, trim:true },
+    userId: {type: Schema.Types.ObjectId, ref: "User", required: true},
+    thoughtId: {type: Schema.Types.ObjectId, ref: "Thought", required: true},
     createdAt: {type: Date, default: Date.now, },
 }, {
     toJSON: {

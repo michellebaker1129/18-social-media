@@ -13,7 +13,6 @@ module.exports = {
             });
     },
 
-    //TODO can successfully get user, fails ot trigger error for incorrect ID
     async getSingleUser(req, res) {
         try {
             const dbUserData = await User.findOne({ _id: req.params.userId })

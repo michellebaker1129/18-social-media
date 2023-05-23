@@ -1,9 +1,11 @@
 const {Schema, model} = require('mongoose');
 const reactionSchema = require("./Reaction");
 // Schemas define the shape of the documents within the collection.
+
+// Thoughts are posts
 const thoughtSchema = new Schema({
   // Schemas define the properties of the document
-  username: { type: String, required: true, trim:true },
+  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   thoughtText: { type: String, required: true, minlength: 1 , maxlength:280 },
   reactions: [reactionSchema],
   createdAt: {type: Date, default: Date.now, },
