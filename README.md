@@ -1,6 +1,6 @@
 # 18-social-media
 
-user = student
+<!-- user = student
 course = thought
 
 when i delete a user i want to delete all their thoughts
@@ -50,4 +50,23 @@ add friend
       )
       .then(() => res.json({ message: 'Course and students deleted!' }))
       .catch((err) => res.status(500).json(err));
-  },
+  }, -->
+
+## Order of operation
+
+1. Users
+   1. POST new user, save [user ID] (do this twice to have two IDs)
+   2. POST add a friend by [user ID] and [friend user ID]
+   3. GET all users
+   4. GET user by [user ID]
+   5. UPDATE user by [user ID]
+   6. DELETE remove friend by [user ID] and [friend user ID]
+   7. DELETE user by [friend user ID], keep [user ID]
+2. Thoughts
+   1. POST new thought using [user ID], save [thought ID]
+   2. POST new reaction, using [thought ID] and [user ID], save [reaction ID]
+   3. GET all thoughts
+   4. GET thought by [thought ID]
+   5. UPDATE thought by [thought ID] (pass new thoughtText)
+   6. DELETE reaction by [thought ID] and [reaction ID]
+   7. DELETE thought by [thought ID]
